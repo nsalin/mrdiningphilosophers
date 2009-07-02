@@ -11,24 +11,16 @@ package diningphilosophers;
  */
 public class Philosopher extends Thread {
 
-    private static final boolean THINKING = false;
-    private static final boolean EATING = true;
-
+    private int philosopher_id;
+    private int init_mode;
+    DiningTable Table;
     private Fork LeftFork;
     private Fork RightFork;
-    private boolean dining_state = THINKING;
-    private int init_mode = 0;
 
-    Philosopher( int t_init_mode ) {
+    Philosopher( int t_philosopher_id, int t_init_mode, DiningTable t_Table ) {
+        philosopher_id = t_philosopher_id;
         init_mode = t_init_mode;
-    }
-
-    public synchronized boolean isEating() {
-        return dining_state;
-    }
-
-    public synchronized void setDiningState( boolean new_state ) {
-        dining_state = new_state;
+        Table = t_Table;
     }
 
     public void setLeftFork( Fork t_LeftFork ) {
@@ -41,7 +33,6 @@ public class Philosopher extends Thread {
 
     public void run() {
         if( init_mode == 1 ) {
-            setDiningState(THINKING);
             GiveAndGetForkThread GiveAndGetLeftFork = new GiveAndGetForkThread( LeftFork );
             GetForkThread GetRightFork = new GetForkThread( RightFork );
             GiveAndGetLeftFork.start();
@@ -53,12 +44,10 @@ public class Philosopher extends Thread {
                 GetRightFork.join();
             } catch( InterruptedException e ) {}
 
-            setDiningState(EATING);
             eat();
         }
 
         if( init_mode == 2 ) {
-            setDiningState(THINKING);
             GetForkThread GetLeftFork = new GetForkThread( LeftFork );
             GetForkThread GetRightFork = new GetForkThread( RightFork );
             GetLeftFork.start();
@@ -70,12 +59,10 @@ public class Philosopher extends Thread {
                 GetRightFork.join();
             } catch( InterruptedException e ) {}
 
-            setDiningState(EATING);
             eat();
         }
 
         while( true ) {
-            setDiningState(THINKING);
             GiveAndGetForkThread GiveAndGetLeftFork = new GiveAndGetForkThread( LeftFork );
             GiveAndGetForkThread GiveAndGetRightFork = new GiveAndGetForkThread( RightFork );
             GiveAndGetLeftFork.start();
@@ -87,12 +74,15 @@ public class Philosopher extends Thread {
                 GiveAndGetRightFork.join();
             } catch( InterruptedException e ) {}
 
-            setDiningState(EATING);
             eat();
         }
     }
 
     private void eat() {
+        Table.updatePhilosopher( philosopher_id, true );
+
         // TODO
+        
+        Table.updatePhilosopher( philosopher_id, false );
     }
 }

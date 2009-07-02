@@ -11,6 +11,9 @@ package diningphilosophers;
  */
 public class Philosopher extends Thread {
 
+    private static final boolean THINKING = false;
+    private static final boolean EATING = true;
+
     private Fork LeftFork;
     private Fork RightFork;
     private boolean dining_state = THINKING;

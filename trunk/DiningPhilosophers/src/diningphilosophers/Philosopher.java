@@ -75,13 +75,20 @@ public class Philosopher extends Thread {
             } catch( InterruptedException e ) {}
 
             eat();
+
+            if( interrupted() ){
+                return;
+            }
         }
     }
 
     private void eat() {
         Table.updatePhilosopher( philosopher_id, true );
 
-        // TODO
+        long eating_time = (long) (1000 + Math.random()*5000);
+        try {
+            sleep(eating_time);
+        } catch( InterruptedException e ) {}
         
         Table.updatePhilosopher( philosopher_id, false );
     }

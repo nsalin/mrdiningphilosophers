@@ -85,7 +85,7 @@ public class Philosopher extends Thread {
     private void eat() {
         Table.updatePhilosopher( philosopher_id, true );
 
-        long eating_time = (long) (1000 + Math.random()*5000);
+        long eating_time = (long) (1000 + Math.random()*2000);
         try {
             sleep(eating_time);
         } catch( InterruptedException e ) {}

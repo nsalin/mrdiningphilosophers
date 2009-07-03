@@ -11,7 +11,7 @@ package diningphilosophers;
  */
 public class Fork {
 
-    private boolean is_dirty = true;
+    private boolean is_dirty = false;
     private int fork_id;
     private boolean side;
     DiningTable Table;
@@ -23,6 +23,7 @@ public class Fork {
     }
 
     public synchronized void get() {
+        System.out.println("Get forkId: " + fork_id + " is_dirty: " + is_dirty + " side: " + side);
         while( !is_dirty )
         {
             try {
@@ -36,6 +37,7 @@ public class Fork {
     }
 
     public synchronized void give() {
+        System.out.println("Give forkId: " + fork_id + " is_dirty: " + is_dirty + " side: " + side);
         is_dirty = true;
         Table.updateFork( fork_id, side, is_dirty );
         notifyAll();

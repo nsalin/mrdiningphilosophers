@@ -32,7 +32,7 @@ public class Philosopher extends Thread {
     }
 
     public void run() {
-        if( init_mode == 1 ) {
+        if( init_mode == 2 ) {
             GiveAndGetForkThread GiveAndGetLeftFork = new GiveAndGetForkThread( LeftFork );
             GetForkThread GetRightFork = new GetForkThread( RightFork );
             GiveAndGetLeftFork.start();
@@ -47,7 +47,7 @@ public class Philosopher extends Thread {
             eat();
         }
 
-        if( init_mode == 2 ) {
+        if( init_mode == 3 ) {
             GetForkThread GetLeftFork = new GetForkThread( LeftFork );
             GetForkThread GetRightFork = new GetForkThread( RightFork );
             GetLeftFork.start();

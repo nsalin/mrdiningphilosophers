@@ -63,8 +63,13 @@ public class DiningTable {
         LastPhilosopher.setLeftFork( forks.get( last_id ) );
         LastPhilosopher.setRightFork( forks.get( last_id - 1 ) );
 
+        /*
         for( Philosopher philosopher : philosophers ) {
             philosopher.start();
+        }
+         * */
+        for( int id = last_id; id >= 0; id-- ) {
+            philosophers.get(id).start();
         }
     }
 

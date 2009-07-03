@@ -130,6 +130,7 @@ public class DiningPhilosophersView extends FrameView {
         jLabel1.setName("jLabel1"); // NOI18N
 
         PhilosophersNumberField.setText(resourceMap.getString("PhilosophersNumberField.text")); // NOI18N
+        PhilosophersNumberField.setAction(actionMap.get("OnSimulateClick")); // NOI18N
         PhilosophersNumberField.setName("PhilosophersNumberField"); // NOI18N
 
         StatesField.setText(resourceMap.getString("StatesField.text")); // NOI18N
@@ -176,6 +177,9 @@ public class DiningPhilosophersView extends FrameView {
         fileMenu.setName("fileMenu"); // NOI18N
 
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
+        exitMenuItem.setMnemonic('S');
+        exitMenuItem.setText(resourceMap.getString("exitMenuItem.text")); // NOI18N
+        exitMenuItem.setToolTipText(resourceMap.getString("exitMenuItem.toolTipText")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
 
@@ -185,6 +189,8 @@ public class DiningPhilosophersView extends FrameView {
         helpMenu.setName("helpMenu"); // NOI18N
 
         aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
+        aboutMenuItem.setMnemonic('b');
+        aboutMenuItem.setText(resourceMap.getString("aboutMenuItem.text")); // NOI18N
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N
         helpMenu.add(aboutMenuItem);
 

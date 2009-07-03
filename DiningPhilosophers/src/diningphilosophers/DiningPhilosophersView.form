@@ -64,6 +64,9 @@
         <Component class="javax.swing.JTextField" name="PhilosophersNumberField">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="PhilosophersNumberField.text"/>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+              <action class="diningphilosophers.DiningPhilosophersView" id="OnSimulateClick" methodName="OnSimulateClick"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="PhilosophersNumberField" noResource="true"/>
           </Properties>
         </Component>
@@ -105,6 +108,9 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="org.jdesktop.application.Application" id="quit" methodName="quit"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="83"/>
+                <Property name="text" type="java.lang.String" resourceKey="exitMenuItem.text"/>
+                <Property name="toolTipText" type="java.lang.String" resourceKey="exitMenuItem.toolTipText"/>
                 <Property name="name" type="java.lang.String" value="exitMenuItem" noResource="true"/>
               </Properties>
               <AuxValues>
@@ -129,6 +135,8 @@
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
                   <action class="diningphilosophers.DiningPhilosophersView" id="showAboutBox" methodName="showAboutBox"/>
                 </Property>
+                <Property name="mnemonic" type="int" value="98"/>
+                <Property name="text" type="java.lang.String" resourceKey="aboutMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="aboutMenuItem" noResource="true"/>
               </Properties>
               <AuxValues>

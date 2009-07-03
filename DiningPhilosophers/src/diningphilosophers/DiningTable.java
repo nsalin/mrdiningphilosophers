@@ -74,11 +74,11 @@ public class DiningTable {
         }
     }
 
-    private void updateString( int index, char c ) {
+    private synchronized void updateString( int index, char c ) {
         states = states.substring( 0, index ) + c + states.substring( index+1 );
     }
 
-    private void updateStatesField() {
+    private synchronized void updateStatesField() {
         Window.updateStatesField(states);
     }
 

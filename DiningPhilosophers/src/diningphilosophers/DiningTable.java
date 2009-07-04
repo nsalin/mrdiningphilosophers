@@ -37,39 +37,58 @@ public class DiningTable {
 
         List<Fork> forks = new ArrayList<Fork>();
 
-        for( int id = 0; id < last_id; id++ ) {
-            forks.add( new Fork( id, RIGHT, this ) );
-            states = states + "T<-d  ";
+        boolean side = RIGHT;
+        for( int id = 0; id < philosophers_number; id++ ) {
+            forks.add( new Fork( id, side, this ) );
+
+            if (side == RIGHT)
+                states = states + "T<-d  ";
+            else
+                states = states + "T  d->";
+
+            side = !side;
         }
-        forks.add( new Fork( last_id, LEFT, this ) );
-        states = states + "T  d->";
 
         philosophers = new ArrayList<Philosopher>();
 
-        Philosopher FirstPhilosopher = new Philosopher( 0, FIRST, this );
-        philosophers.add(FirstPhilosopher);
-        FirstPhilosopher.setLeftFork( forks.get(0) );
-        FirstPhilosopher.setRightFork( forks.get(last_id) );
+        int id = 0;
 
-        for( int id = 1; id < last_id; id++ ) {
-            Philosopher philosopher = new Philosopher( id, NORMAL, this );
-            philosophers.add(philosopher);
-            philosopher.setLeftFork( forks.get( id ) );
-            philosopher.setRightFork( forks.get( id - 1 ) );
+        if (philosophers_number % 2 == 1) {
+            Philosopher FirstPhilosopher = new Philosopher( 0, NORMAL, this );
+            philosophers.add(FirstPhilosopher);
+
+            Philosopher SecondPhilosopher = new Philosopher( 1, LAST, this );
+            philosophers.add(SecondPhilosopher);
+
+            id = 2;
         }
 
-        Philosopher LastPhilosopher = new Philosopher( last_id, LAST, this );
-        philosophers.add(LastPhilosopher);
-        LastPhilosopher.setLeftFork( forks.get( last_id ) );
-        LastPhilosopher.setRightFork( forks.get( last_id - 1 ) );
+        side = RIGHT;
+        for(; id < philosophers_number; id++ ) {
+            if (side == RIGHT) {
+                Philosopher philosopher = new Philosopher( id, FIRST, this );
+                philosophers.add(philosopher);
+            }
+            else {
+                Philosopher philosopher = new Philosopher( id, LAST, this );
+                philosophers.add(philosopher);
+            }
+            side = !side;
+        }
 
-        /*
+        Philosopher p = philosophers.get(0);
+        p.setLeftFork( forks.get( 0 ) );
+        p.setRightFork( forks.get( last_id ) );
+
+        for( id = 1; id < philosophers_number; id++ ) {
+            p = philosophers.get(id);
+            p.setLeftFork( forks.get( id ) );
+            p.setRightFork( forks.get( id - 1 ) );
+        }
+
+
         for( Philosopher philosopher : philosophers ) {
             philosopher.start();
-        }
-         * */
-        for( int id = last_id; id >= 0; id-- ) {
-            philosophers.get(id).start();
         }
     }
 
